@@ -1,0 +1,77 @@
+*{
+    border: 0px solid red;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 1080px;
+    background-color:rgb(160, 160, 160);
+}
+#header-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content:  center;
+    align-content: center;
+    /* background-color:rgb(210, 210, 210); */
+    width: 900px;
+    width: 100%;
+}
+#header-container > h1{
+    display: grid;
+    justify-content:  center;
+    align-content: center;
+}
+#add-new-entry > button{
+    float: right;
+    margin: 8px 16px;
+    padding: 8px 16px;
+    background-color:rgb(210, 210, 210);
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+#field-container{
+    display: grid;
+    grid-template-columns: 120px 100px 100px 180px 180px 180px 80px 80px;
+    grid-auto-rows: 40px;
+    justify-content:  center;
+    align-content: center;
+    width: 100%;
+    grid-gap: 4px;
+}
+#field-container > div{
+    display: grid;
+    justify-content:  center;
+    align-content: center;
+    background-color:rgb(210, 210, 210);
+    font-weight: bold;
+}
+#row-container{
+    display: grid;
+    grid-template-columns: 120px 100px 100px 180px 180px 180px 80px 80px;
+    grid-auto-rows: 40px;
+    justify-content:  center;
+    align-content: center;
+    width: 100%;
+    grid-gap: 4px;
+}
+#row-container > div{
+    display: grid;
+    justify-content:  center;
+    align-content: center;
+    text-align: center;
+}
+#action-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content:  center;
+    align-content: center;
+    width: 100%;
+}
+#action-container > button{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+}

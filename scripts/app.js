@@ -15,13 +15,13 @@ import {
 } from "./ui.js"
 
 const createCharacterForm = document.querySelector('#create-character-form')
-const indexCharacterContainer = document.querySelector('#index-character-container')
+const indexCharacterContainer = document.querySelector('#value-container')
 const showCharacterContainer = document.querySelector('#show-character-container')
 
 indexCharacter()
 .then(res => res.json())
 .then(res => {
-    console.log(res)
+    console.log(res.characters[0]._id)
     onIndexCharacterSuccess(res.characters)
 })
 .catch(onFailure)
@@ -31,7 +31,7 @@ createCharacterForm.addEventListener('submit', (event) => {
     event.preventDefault()
     const characterData = {
         character:{
-            name: event.target['characterName'].value,
+            name: event.target['name'].value,
             attribute: event.target['attribute'].value,
             killer: event.target['killer'].value,
             soulTrait: event.target['soulTrait'].value,
@@ -61,7 +61,7 @@ showCharacterContainer.addEventListener('submit', (event) => {
 	const id = event.target.getAttribute('data-id')
 	const characterData = {
 		character: {
-			name: event.target['characterName'].value,
+			name: event.target['name'].value,
             attribute: event.target['attribute'].value,
             killer: event.target['killer'].value,
             soulTrait: event.target['soulTrait'].value,
