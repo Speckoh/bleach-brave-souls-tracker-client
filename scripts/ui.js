@@ -1,6 +1,6 @@
-const indexHeroContainer = document.querySelector('#index-hero-container')
+const indexCharacterContainer = document.querySelector('#index-character-container')
 const messageContainer = document.querySelector('#message-container')
-const showHeroContainer = document.querySelector('#show-hero-container')
+const showCharacterContainer = document.querySelector('#show-character-container')
 
 //Check for Failure
 export const onFailure = (error) => {
@@ -11,46 +11,55 @@ export const onFailure = (error) => {
 }
 
 //CREATE
-export const onCreateHeroSuccess = () => {
-    messageContainer.innerText = 'You have created a hero!! : )'
+export const onCreateCharacterSuccess = () => {
+    messageContainer.innerText = 'You have created a character!! : )'
 }
 
 //INDEX
-export const onIndexHeroSuccess = (heroes) => {
-    heroes.forEach(hero => {
+export const onIndexCharacterSuccess = (characters) => {
+    characters.forEach(character => {
         const div = document.createElement('div')
-        div.innerHTML = `<h3>${hero.heroName}</h3><h3>${hero.realName}</h3>
-        <button data-id="${hero._id}">Show Hero</button>
+        div.innerHTML = `<h3>${character.name}</h3>
+        <h3>${character.attribute}</h3>
+        <h3>${character.killer}</h3>
+        <h3>${character.soulTrait}</h3>
+        <h3>${character.characterLinks}</h3>
+        <h3>${character.slotLvls}</h3>
+        <button data-id="${character._id}">Show Character</button>
         `
-        indexHeroContainer.appendChild(div)
+        indexCharacterContainer.appendChild(div)
     })
 }
 
 //SHOW - UPDATE - DELETE
-export const onShowHeroSuccess = (hero) => {
+export const onShowCharacterSuccess = (character) => {
     const div = document.createElement('div')
-    div.innerHTML = `<h3>${hero.heroName}</h3>
-    <p>${hero.specialAbility}</p>
-    <p>${hero._id}</p>
+    div.innerHTML = `<h3>${character.name}</h3>
+    <p>${character.attribute}</p>
+    <p>${character._id}</p>
 
-    <form data-id="${hero._id}">
-        <input type="text" name="heroName" value="${hero.heroName}" />
-        <input type="text" name="realName" value="${hero.realName}" />
-        <input type="text" name="ability" value="${hero.specialAbility}" />
-        <input type="submit" value="Update Hero" />
+    <form data-id="${character._id}">
+        <input type="text" name="characterName" value="${character.name}" />
+        <input type="text" name="attribute" value="${character.attribute}" />
+        <input type="text" name="killer" value="${character.killer}" />
+        <input type="text" name="soulTrait" value="${character.soulTrait}" />
+        <input type="text" name="characterLinks" value="${character.characterLinks}" />
+        <input type="text" name="slotLvls" value="${character.slotLvls}" />
+        <input type="submit" value="Update Character" />
     </form>
 
-    <button data-id="${hero._id}">Delete Hero</button>
+    <button data-id="${character._id}">Delete Character</button>
     `
-    showHeroContainer.appendChild(div)
+    
+    showCharacterContainer.appendChild(div)
 }
 
 //UPDATE
-export const onUpdateHeroSuccess = () => {
+export const onUpdateCharacterSuccess = () => {
     messageContainer.innerText = 'Update was successful! :)'
 }
 
 //DELETE
-export const onDeleteHeroSuccess = () => {
+export const onDeleteCharacterSuccess = () => {
     messageContainer.innerText = 'Delete was successful! :)'
 }

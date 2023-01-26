@@ -31,9 +31,13 @@ createCharacterForm.addEventListener('submit', (event) => {
     event.preventDefault()
     const characterData = {
         character:{
-            characterName: event.target['characterName'].value,
-            realName: event.target['realName'].value,
-            specialAbility: event.target['ability'].value
+            name: event.target['characterName'].value,
+            attribute: event.target['attribute'].value,
+            killer: event.target['killer'].value,
+            soulTrait: event.target['soulTrait'].value,
+            // accessories: event.target['ability'].value
+            characterLinks: event.target['characterLinks'].value,
+            slotLvls: event.target['slotLvls'].value
         }
     }
     createCharacter(characterData)
@@ -57,9 +61,12 @@ showCharacterContainer.addEventListener('submit', (event) => {
 	const id = event.target.getAttribute('data-id')
 	const characterData = {
 		character: {
-			characterName: event.target['characterName'].value,
-            realName: event.target['realName'].value,
-            specialAbility: event.target['ability'].value
+			name: event.target['characterName'].value,
+            attribute: event.target['attribute'].value,
+            killer: event.target['killer'].value,
+            soulTrait: event.target['soulTrait'].value,
+            characterLinks: event.target['characterLinks'].value,
+            slotLvls: event.target['slotLvls'].value
 		},
 	}
     if (!id){return}
