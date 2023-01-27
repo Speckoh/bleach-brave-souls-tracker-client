@@ -12,6 +12,18 @@ export const createCharacter = (data) => {
         },
         body: JSON.stringify(data)
     })
+    // .then(function(){
+    //     console.log(data)
+    //     console.log(indexCharacter())
+    //     location.reload();
+    //     document.querySelector('#main-page').style.display = 'block'
+    //     document.querySelector('#create-update-page').style.display = 'none'
+    // })
+    // .then(response => response.json())
+    // .then(function(){
+    //     document.querySelector('#main-page').style.display = 'block'
+    //     document.querySelector('#create-update-page').style.display = 'none'
+    // })
 }
 
 export const showCharacter = (id) => {

@@ -1,20 +1,26 @@
+import { 
+    indexCharacter
+} from "./api.js"
+
 const indexCharacterContainer = document.querySelector('#value-container')
-// const messageContainer = document.querySelector('#message-container')
 const showCharacterContainer = document.querySelector('#show-character-container')
 
 //Check for Failure
 export const onFailure = (error) => {
-    // messageContainer.innerHTML = `
-    // <h3>You've got an error! : (</h3>
-    // <p>${error}</p>
-    // `
     console.log("You've got an error!")
 }
 
 //CREATE
 export const onCreateCharacterSuccess = () => {
     console.log("you created the entry!")
-    // messageContainer.innerText = 'You have created a character!! : )'
+    refreshEntries(document.querySelector('#value-container'))
+    indexCharacter()
+    .then(res => res.json())
+    .then(res => {
+    onIndexCharacterSuccess(res.characters)
+    document.querySelector('#main-page').style.display = 'block'
+    document.querySelector('#create-update-page').style.display = 'none'
+    })
 }
 
 //INDEX
@@ -32,7 +38,9 @@ export const onIndexCharacterSuccess = (characters) => {
             <div>${character.slotLvls}</div>
             <div id="action-container">
                 <button>U</button>
-                <button>D</button>
+                <button data-id="${character._id}" id="delete-entry">
+                <img class="trash-icon" src="./assets/trash.png" alt="trashcan">
+                </button>
             </div>
         </div>
         `
@@ -66,11 +74,15 @@ export const onShowCharacterSuccess = (character) => {
 //UPDATE
 export const onUpdateCharacterSuccess = () => {
     console.log("update was successful!")
-    // messageContainer.innerText = 'Update was successful! :)'
 }
 
 //DELETE
 export const onDeleteCharacterSuccess = () => {
     console.log("delete was successful!")
-    // messageContainer.innerText = 'Delete was successful! :)'
+}
+
+export const refreshEntries = (container) =>{
+    while(container.lastElementChild){
+        container.removeChild(container.lastElementChild)
+    }
 }

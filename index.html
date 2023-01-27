@@ -50,24 +50,78 @@
             <h1>Bleach Brave Souls Tracker</h1>
         </div>
         <div id="create-character-container">
+            <!-- TAG CHARACTER -->
             <div class="base-fields-tag">Character</div>
+            <!-- INPUT CHARACTER -->
             <div class="input-field"><input class="character-field-input" id="input-name" type="text" placeholder="Character" /></div>
+            <!-- TAG CHARACTER LINK -->
             <div class="character-link-tag">Character Links</div>
+            <!-- TAG SLOT -->
             <div class="slot-lvl-tag">Slot Lvl</div>
+            <!-- TAG ATTRIBUTE -->
             <div class="base-fields-tag">Attribute</div>
-            <div class="input-field"><input class="attribute-field-input" type="text" placeholder="Attribute" /></div>
-            <div class="input-field"><input class="link-field-input" id="input-link1" type="text" placeholder="link 1" /></div>
-            <div class="input-field"><input class="slot-field-input" id="input-slot1" type="text" placeholder="slot 1" /></div>
+            <!-- INPUT ATTRIBUTE -->
+            <div class="input-field"><input class="attribute-field-input" id="input-attribute" type="text" placeholder="Attribute" /></div>
+            <!-- INPUT CHARACTER LINK 1 -->
+            <div class="input-field"><input class="link-field-input" id="input-link1" type="text" placeholder="Character" /></div>
+            <!-- INPUT SLOT 1 LVL -->
+            <div class="input-field"><input class="slot-field-input" id="input-slot1" type="text" placeholder="Number" /></div>
+            <!-- TAG KILLER -->
             <div class="base-fields-tag">Killer</div>
-            <div class="input-field"><input class="killer-field-input" id="base-fields-input" type="text" placeholder="Killer" /></div>
-            <div class="input-field"><input class="link-field-input" id="input-link2" type="text" placeholder="link 2" /></div>
-            <div class="input-field"><input class="slot-field-input" id="input-slot2" type="text" placeholder="slot 2" /></div>
+            <!-- INPUT KILLER -->
+            <div class="input-field"><input class="killer-field-input" id="input-killer" type="text" placeholder="Killer" /></div>
+            <!-- INPUT CHARACTER LINK 2 -->
+            <div class="input-field"><input class="link-field-input" id="input-link2" type="text" placeholder="Character" /></div>
+            <!-- INPUT SLOT 2 LVL -->
+            <div class="input-field"><input class="slot-field-input" id="input-slot2" type="text" placeholder="Number" /></div>
+            <!-- TAG SOUL TRAIT -->
             <div class="base-fields-tag">Soul Trait</div>
-            <div class="input-field"><input class="soul-trait-field-input" id="base-fields-input" type="text" placeholder="Soul Trait" /></div>
-            <div class="input-field"><input class="link-field-input" id="input-link3" type="text" placeholder="link 3" /></div>
-            <div class="input-field"><input class="slot-field-input" id="input-slot3" type="text" placeholder="slot 3" /></div>
+            <!-- INPUT SOUL TRAIT -->
+            <div class="input-field"><input class="soul-trait-field-input" id="input-soulTrait" type="text" placeholder="Soul Trait" /></div>
+            <!-- INPUT CHARACTER LINK 3 -->
+            <div class="input-field"><input class="link-field-input" id="input-link3" type="text" placeholder="Character" /></div>
+            <!-- INPUT SLOT 3 LVL -->
+            <div class="input-field"><input class="slot-field-input" id="input-slot3" type="text" placeholder="Number" /></div>
         </div>
+        <div id="create-accessory-container">
+            <div class="accessory-field">Slot #</div>
+            <div class="accessory-field">Accessories</div>
+            <div class="accessory-field">Attribute</div>
+            <div class="accessory-field">Effect</div>
+            <div class="accessory-field">Bonus</div>
+            <div class="accessory-field">&nbsp;</div>
 
+            <div class="accessory-field">1</div>
+            <div class="input-field"><input class="accessory-field-input" type="text" placeholder="Accessory" /></div>
+            <div class="input-field"><input class="acc-attribute-field-input" type="text" placeholder="Attribute" /></div>
+            <div class="input-field"><input class="effect-field-input" type="text" placeholder="Primary Effect" /></div>
+            <div class="input-field"><input class="bonus-field-input" type="text" placeholder="Bonus Effect" /></div>
+            <div class="delete-accessory">
+                <button><img class="trash-icon" src="./assets/trash.png" alt="trashcan"></button>
+            </div>
+            
+            <div class="accessory-field">2</div>
+            <div class="input-field"><input class="accessory-field-input" type="text" placeholder="Accessory" /></div>
+            <div class="input-field"><input class="acc-attribute-field-input" type="text" placeholder="Attribute" /></div>
+            <div class="input-field"><input class="effect-field-input" type="text" placeholder="Primary Effect" /></div>
+            <div class="input-field"><input class="bonus-field-input" type="text" placeholder="Bonus Effect" /></div>
+            <div class="delete-accessory">
+                <button><img class="trash-icon" src="./assets/trash.png" alt="trashcan"></button>
+            </div>
+            
+            <div class="accessory-field">3</div>
+            <div class="input-field"><input class="accessory-field-input" type="text" placeholder="Accessory" /></div>
+            <div class="input-field"><input class="acc-attribute-field-input" type="text" placeholder="Attribute" /></div>
+            <div class="input-field"><input class="effect-field-input" type="text" placeholder="Primary Effect" /></div>
+            <div class="input-field"><input class="bonus-field-input" type="text" placeholder="Bonus Effect" /></div>
+            <div class="delete-accessory">
+                <button><img class="trash-icon" src="./assets/trash.png" alt="trashcan"></button>
+            </div>
+        </div>
+        <div id="add-return-container">
+            <div class="add-update-return"><button id="add-update-button">Add/Update</button></div>
+            <div class="add-update-return"><button id="return-button">Return</button></div>
+        </div>
         <!-- <form id="create-character-form">
             <input id="input-name" type="text" placeholder="character" />
             <input id="input-attribute" type="text" placeholder="attribute" />
