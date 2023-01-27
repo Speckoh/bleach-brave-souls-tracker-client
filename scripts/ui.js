@@ -1,5 +1,5 @@
 const indexCharacterContainer = document.querySelector('#value-container')
-const messageContainer = document.querySelector('#message-container')
+// const messageContainer = document.querySelector('#message-container')
 const showCharacterContainer = document.querySelector('#show-character-container')
 
 //Check for Failure
@@ -8,12 +8,13 @@ export const onFailure = (error) => {
     // <h3>You've got an error! : (</h3>
     // <p>${error}</p>
     // `
-    console.log("You've got an error! : (")
+    console.log("You've got an error!")
 }
 
 //CREATE
 export const onCreateCharacterSuccess = () => {
-    messageContainer.innerText = 'You have created a character!! : )'
+    console.log("you created the entry!")
+    // messageContainer.innerText = 'You have created a character!! : )'
 }
 
 //INDEX
@@ -64,10 +65,12 @@ export const onShowCharacterSuccess = (character) => {
 
 //UPDATE
 export const onUpdateCharacterSuccess = () => {
-    messageContainer.innerText = 'Update was successful! :)'
+    console.log("update was successful!")
+    // messageContainer.innerText = 'Update was successful! :)'
 }
 
 //DELETE
 export const onDeleteCharacterSuccess = () => {
-    messageContainer.innerText = 'Delete was successful! :)'
+    console.log("delete was successful!")
+    // messageContainer.innerText = 'Delete was successful! :)'
 }

@@ -9,48 +9,75 @@
     <title>Bleach Brave Souls Tracker</title>
 </head>
 <body>
-    <div id="header-container">
-        <h1>Bleach Brave Souls Tracker</h1>
+    <div id="main-page">
+        <div class="header-container">
+            <h1>Bleach Brave Souls Tracker</h1>
+        </div>
+        <!-- <div id="message-container"></div> -->
+        <div id="add-new-entry"><button id="add-new-entry-button">Add New Entry</button></div>
+        <div id="field-container">
+            <div>Character</div>
+            <div>Attribute</div>
+            <div>Killer</div>
+            <div>Soul Trait</div>
+            <div>Accessories</div>
+            <div>Character Links</div>
+            <div>Slot Lvl</div>
+            <div>Action</div>
+        </div>
+        <div id="value-container">
+            <!-- <div id="row-container">
+                <div>Ichigo</div>
+                <div>Heart</div>
+                <div>Arrancer</div>
+                <div>Strong attack recharge time -14%</div>
+                <div></div>
+                <div>Orihime</div>
+                <div></div>
+                <div id="action-container">
+                    <button>U</button>
+                    <button>D</button>
+                </div>
+            </div> -->
+        </div>
+        
+        <div id="index-character-container"></div>
+        <div id="show-character-container"></div>
     </div>
-    <!-- <div id="message-container"></div> -->
-    <div id="add-new-entry"><button>Add New Entry</button></div>
-    <div id="field-container">
-        <div>Character</div>
-        <div>Attribute</div>
-        <div>Killer</div>
-        <div>Soul Trait</div>
-        <div>Accessories</div>
-        <div>Character Links</div>
-        <div>Slot Lvl</div>
-        <div>Action</div>
-    </div>
-    <div id="value-container">
-        <!-- <div id="row-container">
-            <div>Ichigo</div>
-            <div>Heart</div>
-            <div>Arrancer</div>
-            <div>Strong attack recharge time -14%</div>
-            <div></div>
-            <div>Orihime</div>
-            <div></div>
-            <div id="action-container">
-                <button>U</button>
-                <button>D</button>
-            </div>
-        </div> -->
-    </div>
-    <div id="index-character-container"></div>
-    <div id="show-character-container"></div>
 
-    <form id="create-character-form">
-        <input type="text" name="name" placeholder="character" />
-        <input type="text" name="attribute" placeholder="attribute" />
-        <input type="text" name="killer" placeholder="killer" />
-        <input type="text" name="soulTrait" placeholder="soulTrait" />
-        <input type="text" name="characterLinks" placeholder="characterLinks" />
-        <input type="text" name="slotLvls" placeholder="slotLvls" />
-        <!-- <input type="submit" value="Create Character" /> -->
-    </form>
+    <div id="create-update-page">
+        <div class="header-container">
+            <h1>Bleach Brave Souls Tracker</h1>
+        </div>
+        <div id="create-character-container">
+            <div class="base-fields-tag">Character</div>
+            <div class="input-field"><input class="character-field-input" id="input-name" type="text" placeholder="Character" /></div>
+            <div class="character-link-tag">Character Links</div>
+            <div class="slot-lvl-tag">Slot Lvl</div>
+            <div class="base-fields-tag">Attribute</div>
+            <div class="input-field"><input class="attribute-field-input" type="text" placeholder="Attribute" /></div>
+            <div class="input-field"><input class="link-field-input" id="input-link1" type="text" placeholder="link 1" /></div>
+            <div class="input-field"><input class="slot-field-input" id="input-slot1" type="text" placeholder="slot 1" /></div>
+            <div class="base-fields-tag">Killer</div>
+            <div class="input-field"><input class="killer-field-input" id="base-fields-input" type="text" placeholder="Killer" /></div>
+            <div class="input-field"><input class="link-field-input" id="input-link2" type="text" placeholder="link 2" /></div>
+            <div class="input-field"><input class="slot-field-input" id="input-slot2" type="text" placeholder="slot 2" /></div>
+            <div class="base-fields-tag">Soul Trait</div>
+            <div class="input-field"><input class="soul-trait-field-input" id="base-fields-input" type="text" placeholder="Soul Trait" /></div>
+            <div class="input-field"><input class="link-field-input" id="input-link3" type="text" placeholder="link 3" /></div>
+            <div class="input-field"><input class="slot-field-input" id="input-slot3" type="text" placeholder="slot 3" /></div>
+        </div>
+
+        <!-- <form id="create-character-form">
+            <input id="input-name" type="text" placeholder="character" />
+            <input id="input-attribute" type="text" placeholder="attribute" />
+            <input id="input-killer" type="text" placeholder="killer" />
+            <input id="input-soulTrait" type="text" placeholder="soulTrait" />
+            <input id="input-characterLinks" type="text" placeholder="characterLinks" />
+            <input id="input-slotLvls" type="text" placeholder="slotLvls" />
+             <input type="submit" value="Create Character" /> 
+        </form> -->
+    </div>
 
 </body>
 </html>

@@ -27,22 +27,25 @@ indexCharacter()
 .catch(onFailure)
 
 //CREATE
-createCharacterForm.addEventListener('submit', (event) => {
+document.addEventListener('click', (event) => {
     event.preventDefault()
-    const characterData = {
-        character:{
-            name: event.target['name'].value,
-            attribute: event.target['attribute'].value,
-            killer: event.target['killer'].value,
-            soulTrait: event.target['soulTrait'].value,
-            // accessories: event.target['ability'].value
-            characterLinks: event.target['characterLinks'].value,
-            slotLvls: event.target['slotLvls'].value
-        }
+    if(event.target.matches('#add-new-entry-button')){
+        console.log('bring up add page')
+        // const characterData = {
+        //     character:{
+        //         name: document.querySelector('#input-name').value,
+        //         attribute: document.querySelector('#input-attribute').value,
+        //         killer: document.querySelector('#input-killer').value,
+        //         soulTrait: document.querySelector('#input-soulTrait').value,
+        //         // accessories: event.target['ability'].value
+        //         characterLinks: document.querySelector('#input-characterLinks').value,
+        //         slotLvls: document.querySelector('#input-slotLvls').value
+        //     }
+        // }
+        // createCharacter(characterData)
+        // .then(onCreateCharacterSuccess)
+        // .catch(onFailure)
     }
-    createCharacter(characterData)
-    .then(onCreateCharacterSuccess)
-    .catch(onFailure)
 })
 
 //SHOW
