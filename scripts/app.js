@@ -22,13 +22,28 @@ const indexCharacterContainer = document.querySelector('#value-container')
 const showCharacterContainer = document.querySelector('#show-character-container')
 // const deleteButton = document.querySelector('#delete-entry')
 
-let addingEntry = false;
-let entryToUpdate;
+let characterLink1 = document.querySelector('#input-link1')
+let characterLink2 = document.querySelector('#input-link2')
+let characterLink3 = document.querySelector('#input-link3')
+
+let slot1Lvl = document.querySelector('#input-slot1')
+let slot2Lvl = document.querySelector('#input-slot2')
+let slot3Lvl = document.querySelector('#input-slot3')
+
+let addingEntry = false
+let entryToUpdate
+
+function checkSlotValue(slotLvl){
+    if(Number.isInteger(parseInt(slotLvl.value))){
+        return slotLvl.value
+    }else{
+        return 0
+    }
+}
 
 indexCharacter()
 .then(res => res.json())
 .then(res => {
-    console.log(res.characters[0]._id)
     onIndexCharacterSuccess(res.characters)
 })
 .catch(onFailure)
@@ -38,7 +53,6 @@ document.addEventListener('click', (event) => {
     event.preventDefault()
     //GO TO CREATE/UPDATE PAGE TO ADD
     if(event.target.matches('#add-new-entry-button')){
-        console.log('bring up add page')
         addingEntry = true;
         createUpdatePage.style.display = 'block'
         mainPage.style.display = 'none'
@@ -48,7 +62,6 @@ document.addEventListener('click', (event) => {
     }
     //GO TO CREATE/UPDATE PAGE TO EDIT
     if(event.target.matches('#update-entry')){
-        console.log('bring up edit page')
         addingEntry = false;
         const id = event.target.getAttribute('data-id')
         entryToUpdate = id;
@@ -57,43 +70,29 @@ document.addEventListener('click', (event) => {
         showCharacter(id)
         .then((res) => res.json())
         .then((res) => {
-            // console.log(res.character)
+            console.log(res.character)
             document.querySelector('#input-name').value = res.character.name
             document.querySelector('#input-attribute').value = res.character.attribute
             document.querySelector('#input-killer').value = res.character.killer
             document.querySelector('#input-soulTrait').value = res.character.soulTrait
+            characterLink1.value = res.character.characterLinks[0]
+            characterLink2.value = res.character.characterLinks[1]
+            characterLink3.value = res.character.characterLinks[2]
+            slot1Lvl.value = res.character.slot1Lvls
+            slot2Lvl.value = res.character.slot2Lvls
+            slot3Lvl.value = res.character.slot3Lvls
         })
 		.catch(onFailure)
-        // //UPDATE
-// showCharacterContainer.addEventListener('submit', (event) => {
-// 	event.preventDefault()
-// 	const id = event.target.getAttribute('data-id')
-// 	const characterData = {
-// 		character: {
-// 			name: event.target['name'].value,
-//             attribute: event.target['attribute'].value,
-//             killer: event.target['killer'].value,
-//             soulTrait: event.target['soulTrait'].value,
-//             characterLinks: event.target['characterLinks'].value,
-//             slotLvls: event.target['slotLvls'].value
-// 		},
-// 	}
-//     if (!id){return}
-// 	updateCharacter(characterData, id)
-// 		.then(onUpdateCharacterSuccess)
-// 		.catch(onFailure)
-// })
     }
     //Return to MAIN PAGE
     if(event.target.matches('#return-button')){
-        console.log('back to main page')
         mainPage.style.display = 'block'
         createUpdatePage.style.display = 'none'
     }
-    //ADD BUTTON to ADD THE ENTRY
+    //CLICKING THE ADD/UPDATE BUTTON ON ADD/UPDATE PAGE
     if(event.target.matches('#add-update-button')){
+        //ADDING NEW ENTRY
         if(addingEntry){
-            console.log('add/create button pressed')
             const characterData = {
                 character:{
                     name: document.querySelector('#input-name').value,
@@ -101,14 +100,22 @@ document.addEventListener('click', (event) => {
                     killer: document.querySelector('#input-killer').value,
                     soulTrait: document.querySelector('#input-soulTrait').value,
                     // accessories: event.target['ability'].value
-                    characterLinks: document.querySelector('#input-link1').value,
-                    slotLvls: document.querySelector('#input-slot1').value
+                    characterLinks: [],
+                    slot1Lvls: checkSlotValue(slot1Lvl),
+                    slot2Lvls: checkSlotValue(slot2Lvl),
+                    slot3Lvls: checkSlotValue(slot3Lvl),
+                    slotLvls: checkSlotValue(slot1Lvl) + '/' + checkSlotValue(slot2Lvl) 
+                    + '/' + checkSlotValue(slot3Lvl)
                 }
             }
+            characterData.character.characterLinks.push(characterLink1.value)
+            characterData.character.characterLinks.push(characterLink2.value)
+            characterData.character.characterLinks.push(characterLink3.value)
             createCharacter(characterData)
             .then(onCreateCharacterSuccess)
             .catch(onFailure)
         }
+        //UPDATING AN EXISTING ENTRY
         else if(!addingEntry){
             console.log(entryToUpdate)
             const characterData = {
@@ -116,9 +123,16 @@ document.addEventListener('click', (event) => {
                     name: document.querySelector('#input-name').value,
                     attribute: document.querySelector('#input-attribute').value,
                     killer: document.querySelector('#input-killer').value,
-                    soulTrait: document.querySelector('#input-soulTrait').value
+                    soulTrait: document.querySelector('#input-soulTrait').value,
+                    characterLinks: [characterLink1.value, characterLink2.value, characterLink3.value],
+                    slot1Lvls: checkSlotValue(slot1Lvl),
+                    slot2Lvls: checkSlotValue(slot2Lvl),
+                    slot3Lvls: checkSlotValue(slot3Lvl),
+                    slotLvls: checkSlotValue(slot1Lvl) + '/' + checkSlotValue(slot2Lvl) 
+                    + '/' + checkSlotValue(slot3Lvl)
                 }
             }
+            console.log(characterData)
             updateCharacter(characterData, entryToUpdate)
             .then(onUpdateCharacterSuccess)
             .then(function(){
@@ -151,42 +165,3 @@ document.addEventListener('click', (event) => {
 		.catch(onFailure)
     }
 })
-
-// //SHOW
-// indexCharacterContainer.addEventListener('click', (event) => {
-//     const id = event.target.getAttribute("data-id")
-//     if (!id){return}
-//     showCharacter(id)
-//     .then((res) => res.json())
-// 	.then((res) => onShowCharacterSuccess(res.character))
-// 	.catch(onFailure)
-// })
-
-// //UPDATE
-// showCharacterContainer.addEventListener('submit', (event) => {
-// 	event.preventDefault()
-// 	const id = event.target.getAttribute('data-id')
-// 	const characterData = {
-// 		character: {
-// 			name: event.target['name'].value,
-//             attribute: event.target['attribute'].value,
-//             killer: event.target['killer'].value,
-//             soulTrait: event.target['soulTrait'].value,
-//             characterLinks: event.target['characterLinks'].value,
-//             slotLvls: event.target['slotLvls'].value
-// 		},
-// 	}
-//     if (!id){return}
-// 	updateCharacter(characterData, id)
-// 		.then(onUpdateCharacterSuccess)
-// 		.catch(onFailure)
-// })
-
-// //DELETE
-// showCharacterContainer.addEventListener('click', (event) => {
-// 	const id = event.target.getAttribute('data-id')
-//     if (!id){return}
-// 	deleteCharacter(id)
-// 		.then(onDeleteCharacterSuccess)
-// 		.catch(onFailure)
-// })

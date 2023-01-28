@@ -172,6 +172,9 @@ body{
     font-weight: bold;
     border-radius: 8px;
 }
+input{
+    background-color: white;
+}
 button{
     cursor: pointer;
 }

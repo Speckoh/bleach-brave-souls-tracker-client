@@ -5,6 +5,14 @@ import {
 const indexCharacterContainer = document.querySelector('#value-container')
 const showCharacterContainer = document.querySelector('#show-character-container')
 
+function formatCharacterLinks(character){
+    for(let i = 0; i < 3; i++){
+        if(character.characterLinks[i] === undefined || character.characterLinks[i] === ''){
+            character.characterLinks[i] = 'Empty'
+        }
+    }
+    return character.characterLinks[0] + ', ' + character.characterLinks[1] + ', ' + character.characterLinks[2]
+}
 //Check for Failure
 export const onFailure = (error) => {
     console.log("You've got an error!")
@@ -34,7 +42,7 @@ export const onIndexCharacterSuccess = (characters) => {
             <div>${character.killer}</div>
             <div>${character.soulTrait}</div>
             <div></div>
-            <div>${character.characterLinks}</div>
+            <div>${formatCharacterLinks(character)}</div>
             <div>${character.slotLvls}</div>
             <div id="action-container">
                 <button data-id="${character._id}" id="update-entry">
