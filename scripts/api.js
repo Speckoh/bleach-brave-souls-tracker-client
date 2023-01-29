@@ -12,18 +12,17 @@ export const createCharacter = (data) => {
         },
         body: JSON.stringify(data)
     })
-    // .then(function(){
-    //     console.log(data)
-    //     console.log(indexCharacter())
-    //     location.reload();
-    //     document.querySelector('#main-page').style.display = 'block'
-    //     document.querySelector('#create-update-page').style.display = 'none'
-    // })
-    // .then(response => response.json())
-    // .then(function(){
-    //     document.querySelector('#main-page').style.display = 'block'
-    //     document.querySelector('#create-update-page').style.display = 'none'
-    // })
+}
+
+export const createAccessory = (data) => {
+    return fetch(`http://localhost:8005/characters/accessories`,{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
 }
 
 export const showCharacter = (id) => {

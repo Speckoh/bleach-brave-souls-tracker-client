@@ -3,24 +3,21 @@ import {
     createCharacter,
     showCharacter,
     updateCharacter, 
-    deleteCharacter
+    deleteCharacter,
+    createAccessory,
 } from "./api.js"
 import { 
     onIndexCharacterSuccess, 
     onFailure, 
     onCreateCharacterSuccess,
-    onShowCharacterSuccess,
 	onUpdateCharacterSuccess,
 	onDeleteCharacterSuccess,
     refreshEntries,
 } from "./ui.js"
 
-const createCharacterForm = document.querySelector('#create-character-form')
 const mainPage = document.querySelector('#main-page')
 const createUpdatePage = document.querySelector('#create-update-page')
 const indexCharacterContainer = document.querySelector('#value-container')
-const showCharacterContainer = document.querySelector('#show-character-container')
-// const deleteButton = document.querySelector('#delete-entry')
 
 let characterLink1 = document.querySelector('#input-link1')
 let characterLink2 = document.querySelector('#input-link2')
@@ -33,11 +30,28 @@ let slot3Lvl = document.querySelector('#input-slot3')
 let addingEntry = false
 let entryToUpdate
 
+//Checks for what is Entered in Input is a Number
 function checkSlotValue(slotLvl){
     if(Number.isInteger(parseInt(slotLvl.value))){
         return slotLvl.value
     }else{
         return 0
+    }
+}
+//Checks for Undefined Slots when Adding in POSTMAN since Slots aren't Required
+function checkSlotForUndefined(slot){
+    if(slot === undefined){
+        return 0
+    }else{
+        return slot
+    }
+}
+//Checks for Undefined Character Links when Adding in POSTMAN since Links aren't Required
+function checkLinkForUndefined(link){
+    if(link === undefined){
+        return ''
+    }else{
+        return link
     }
 }
 
@@ -75,17 +89,25 @@ document.addEventListener('click', (event) => {
             document.querySelector('#input-attribute').value = res.character.attribute
             document.querySelector('#input-killer').value = res.character.killer
             document.querySelector('#input-soulTrait').value = res.character.soulTrait
-            characterLink1.value = res.character.characterLinks[0]
-            characterLink2.value = res.character.characterLinks[1]
-            characterLink3.value = res.character.characterLinks[2]
-            slot1Lvl.value = res.character.slot1Lvls
-            slot2Lvl.value = res.character.slot2Lvls
-            slot3Lvl.value = res.character.slot3Lvls
+            
+            characterLink1.value = checkLinkForUndefined(res.character.characterLinks[0])
+            characterLink2.value = checkLinkForUndefined(res.character.characterLinks[1])
+            characterLink3.value = checkLinkForUndefined(res.character.characterLinks[2])
+
+            slot1Lvl.value = checkSlotForUndefined(res.character.slot1Lvls)
+            slot2Lvl.value = checkSlotForUndefined(res.character.slot2Lvls)
+            slot3Lvl.value = checkSlotForUndefined(res.character.slot3Lvls)
         })
 		.catch(onFailure)
     }
     //Return to MAIN PAGE
     if(event.target.matches('#return-button')){
+        indexCharacter()
+        .then(res => res.json())
+        .then(res => {
+            console.log(res.characters)
+        })
+        .catch(onFailure)
         mainPage.style.display = 'block'
         createUpdatePage.style.display = 'none'
     }
@@ -99,18 +121,32 @@ document.addEventListener('click', (event) => {
                     attribute: document.querySelector('#input-attribute').value,
                     killer: document.querySelector('#input-killer').value,
                     soulTrait: document.querySelector('#input-soulTrait').value,
-                    // accessories: event.target['ability'].value
+                    accessories: [],
                     characterLinks: [],
                     slot1Lvls: checkSlotValue(slot1Lvl),
                     slot2Lvls: checkSlotValue(slot2Lvl),
                     slot3Lvls: checkSlotValue(slot3Lvl),
-                    slotLvls: checkSlotValue(slot1Lvl) + '/' + checkSlotValue(slot2Lvl) 
-                    + '/' + checkSlotValue(slot3Lvl)
+                    slotLvls: `${checkSlotValue(slot1Lvl)}/${checkSlotValue(slot2Lvl)}/${checkSlotValue(slot3Lvl)}`
                 }
             }
             characterData.character.characterLinks.push(characterLink1.value)
             characterData.character.characterLinks.push(characterLink2.value)
             characterData.character.characterLinks.push(characterLink3.value)
+
+            const accessory1Data = {
+                accessory:{
+                    name: document.querySelector('#accessory1').value,
+                    attribute: document.querySelector('#acc-attribute1').value,
+                    effect: document.querySelector('#acc-effect1').value,
+                    bonus: document.querySelector('#acc-bonus1').value
+                }
+            }
+            characterData.character.accessories.push(accessory1Data)
+
+            console.log(characterData)
+
+            // createAccessory(accessory1Data)
+            
             createCharacter(characterData)
             .then(onCreateCharacterSuccess)
             .catch(onFailure)
@@ -128,15 +164,14 @@ document.addEventListener('click', (event) => {
                     slot1Lvls: checkSlotValue(slot1Lvl),
                     slot2Lvls: checkSlotValue(slot2Lvl),
                     slot3Lvls: checkSlotValue(slot3Lvl),
-                    slotLvls: checkSlotValue(slot1Lvl) + '/' + checkSlotValue(slot2Lvl) 
-                    + '/' + checkSlotValue(slot3Lvl)
+                    slotLvls: `${checkSlotValue(slot1Lvl)}/${checkSlotValue(slot2Lvl)}/${checkSlotValue(slot3Lvl)}`
                 }
             }
             console.log(characterData)
             updateCharacter(characterData, entryToUpdate)
             .then(onUpdateCharacterSuccess)
             .then(function(){
-                refreshEntries(document.querySelector('#value-container'))
+                refreshEntries(indexCharacterContainer)
                 indexCharacter()
                 .then(res => res.json())
                 .then(res => {
@@ -155,7 +190,7 @@ document.addEventListener('click', (event) => {
 	    deleteCharacter(id)
 		.then(onDeleteCharacterSuccess)
         .then(function(){
-            refreshEntries(document.querySelector('#value-container'))
+            refreshEntries(indexCharacterContainer)
             indexCharacter()
             .then(res => res.json())
             .then(res => {
