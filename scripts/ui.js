@@ -118,10 +118,10 @@ export const onIndexCharacterSuccess = (characters) => {
             <div>${formatLinks(character.characterLinks)}</div>
             <div>${formatUndefinedSlots(character)}</div>
             <div class="action-container">
-                <button data-id="${character._id}" id="update-entry">
+                <button data-id="${character._id}" class="update-entry">
                 <img class="edit-icon" src="./assets/edit.png">
                 </button>
-                <button data-id="${character._id}" id="delete-entry">
+                <button data-id="${character._id}" class="delete-entry">
                 <img class="trash-icon" src="./assets/trash.png">
                 </button>
             </div>
@@ -141,7 +141,7 @@ export const onDeleteCharacterSuccess = () => {
     console.log("delete was successful!")
 }
 //DELETES Everything in Div Container
-export const refreshEntries = (container) =>{
+export const refreshEntries = (container) => {
     while(container.lastElementChild){
         container.removeChild(container.lastElementChild)
     }
