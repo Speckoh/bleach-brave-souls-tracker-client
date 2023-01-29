@@ -48,29 +48,32 @@ body{
     background-color:rgb(210, 210, 210);
     font-weight: bold;
 }
-#row-container{
+.row-container{
     display: grid;
     grid-template-columns: 120px 100px 100px 180px 180px 180px 80px 80px;
-    grid-auto-rows: 40px;
+    grid-auto-rows: 60px;
     justify-content:  center;
     align-content: center;
     width: 100%;
     grid-gap: 4px;
+    margin: 2px 0;
 }
-#row-container > div{
+.row-container > div{
     display: grid;
     justify-content:  center;
     align-content: center;
     text-align: center;
+    background-color: rgb(180, 180, 180);
+    margin: 2px 0;
 }
-#action-container{
+.action-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content:  center;
     align-content: center;
     width: 100%;
 }
-#action-container > button{
+.action-container > button{
     display: grid;
     justify-content: center;
     align-content: center;
@@ -173,7 +176,7 @@ body{
     border-radius: 8px;
 }
 input{
-    background-color: white;
+    background-color: rgb(255, 255, 255);
 }
 button{
     cursor: pointer;
@@ -205,3 +208,6 @@ img{
     color: rgb(160, 160, 160);
     text-align: center;
 }
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+} 

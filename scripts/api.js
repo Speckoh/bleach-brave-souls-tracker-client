@@ -14,17 +14,6 @@ export const createCharacter = (data) => {
     })
 }
 
-export const createAccessory = (data) => {
-    return fetch(`http://localhost:8005/characters/accessories`,{
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-}
-
 export const showCharacter = (id) => {
     return fetch(`http://localhost:8005/characters/${id}`)
 }
@@ -44,6 +33,36 @@ export const updateCharacter = (data, id) => {
 //DELETE
 export const deleteCharacter = (id) => {
     return fetch(`http://localhost:8005/characters/${id}`, {
+        method: 'DELETE'
+    })
+}
+//################################# ACCESSORY CRUD ##################################
+
+//CREATE Accessory
+export const createAccessory = (data) => {
+    return fetch(`http://localhost:8005/accessories`,{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+}
+//UPDATE
+export const updateAccessory = (data, id) => {
+    return fetch(`http://localhost:8005/accessories/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+}
+//DELETE
+export const deleteAccessory = (id) => {
+    return fetch(`http://localhost:8005/accessories/${id}`, {
         method: 'DELETE'
     })
 }

@@ -29,6 +29,7 @@ let slot3Lvl = document.querySelector('#input-slot3')
 
 let addingEntry = false
 let entryToUpdate
+let accessoryToUpdate
 
 //Checks for what is Entered in Input is a Number
 function checkSlotValue(slotLvl){
@@ -71,7 +72,7 @@ document.addEventListener('click', (event) => {
         createUpdatePage.style.display = 'block'
         mainPage.style.display = 'none'
         document.querySelectorAll('.input-field').forEach( (event) => {
-            event.firstChild.value = '';
+            event.firstElementChild.value = ''
         })
     }
     //GO TO CREATE/UPDATE PAGE TO EDIT
@@ -82,14 +83,16 @@ document.addEventListener('click', (event) => {
         createUpdatePage.style.display = 'block'
         mainPage.style.display = 'none'
         showCharacter(id)
+        
         .then((res) => res.json())
         .then((res) => {
             console.log(res.character)
+            console.log(res.character.accessories[0]._id)
             document.querySelector('#input-name').value = res.character.name
             document.querySelector('#input-attribute').value = res.character.attribute
             document.querySelector('#input-killer').value = res.character.killer
             document.querySelector('#input-soulTrait').value = res.character.soulTrait
-            
+
             characterLink1.value = checkLinkForUndefined(res.character.characterLinks[0])
             characterLink2.value = checkLinkForUndefined(res.character.characterLinks[1])
             characterLink3.value = checkLinkForUndefined(res.character.characterLinks[2])
@@ -97,6 +100,22 @@ document.addEventListener('click', (event) => {
             slot1Lvl.value = checkSlotForUndefined(res.character.slot1Lvls)
             slot2Lvl.value = checkSlotForUndefined(res.character.slot2Lvls)
             slot3Lvl.value = checkSlotForUndefined(res.character.slot3Lvls)
+
+            document.querySelector('#accessory1').value = res.character.accessories[0].name
+            document.querySelector('#accessory2').value = res.character.accessories[1].name
+            document.querySelector('#accessory3').value = res.character.accessories[2].name
+
+            document.querySelector('#acc-attribute1').value = res.character.accessories[0].attribute
+            document.querySelector('#acc-attribute2').value = res.character.accessories[1].attribute
+            document.querySelector('#acc-attribute3').value = res.character.accessories[2].attribute
+
+            document.querySelector('#acc-effect1').value = res.character.accessories[0].effect
+            document.querySelector('#acc-effect2').value = res.character.accessories[1].effect
+            document.querySelector('#acc-effect3').value = res.character.accessories[2].effect
+
+            document.querySelector('#acc-bonus1').value = res.character.accessories[0].bonus
+            document.querySelector('#acc-bonus2').value = res.character.accessories[1].bonus
+            document.querySelector('#acc-bonus3').value = res.character.accessories[2].bonus
         })
 		.catch(onFailure)
     }
@@ -132,24 +151,11 @@ document.addEventListener('click', (event) => {
             characterData.character.characterLinks.push(characterLink1.value)
             characterData.character.characterLinks.push(characterLink2.value)
             characterData.character.characterLinks.push(characterLink3.value)
-
-            const accessory1Data = {
-                accessory:{
-                    name: document.querySelector('#accessory1').value,
-                    attribute: document.querySelector('#acc-attribute1').value,
-                    effect: document.querySelector('#acc-effect1').value,
-                    bonus: document.querySelector('#acc-bonus1').value
-                }
-            }
-            characterData.character.accessories.push(accessory1Data)
-
-            console.log(characterData)
-
-            // createAccessory(accessory1Data)
             
             createCharacter(characterData)
             .then(onCreateCharacterSuccess)
             .catch(onFailure)
+
         }
         //UPDATING AN EXISTING ENTRY
         else if(!addingEntry){
@@ -160,6 +166,9 @@ document.addEventListener('click', (event) => {
                     attribute: document.querySelector('#input-attribute').value,
                     killer: document.querySelector('#input-killer').value,
                     soulTrait: document.querySelector('#input-soulTrait').value,
+                    
+                    // accessories: document.querySelector('#accessory').value,
+                    
                     characterLinks: [characterLink1.value, characterLink2.value, characterLink3.value],
                     slot1Lvls: checkSlotValue(slot1Lvl),
                     slot2Lvls: checkSlotValue(slot2Lvl),

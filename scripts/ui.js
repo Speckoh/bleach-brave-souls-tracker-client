@@ -1,22 +1,36 @@
 import { 
-    indexCharacter
+    indexCharacter,
+    createAccessory
 } from "./api.js"
 
 const indexCharacterContainer = document.querySelector('#value-container')
-const showCharacterContainer = document.querySelector('#show-character-container')
 
 //Check for Failure
 export const onFailure = (error) => {
-    console.log("You've got an error!")
+    console.log(error)
 }
-function formatCharacterLinks(character){
+//Formats the Accessories to Read in Brackets
+function formatAccessories(field){
+    let accessories = ['Empty', 'Empty', 'Empty']
     for(let i = 0; i < 3; i++){
-        if(character.characterLinks[i] === undefined || character.characterLinks[i] === ''){
-            character.characterLinks[i] = 'Empty'
+        if(field[i] !== undefined){
+            if(field[i].name !== ''){
+                accessories[i] = field[i].name
+            }
         }
     }
-    return `[${character.characterLinks[0]}] [${character.characterLinks[1]}] [${character.characterLinks[2]}]`
+    return `[${accessories[0]}] [${accessories[1]}] [${accessories[2]}]`
 }
+//Formats the Character Links to Read in Brackets
+function formatLinks(field){
+    for(let i = 0; i < 3; i++){
+        if(field[i] === undefined || field[i] === ''){
+            field[i] = 'Empty'
+        }
+    }
+    return `[${field[0]}] [${field[1]}] [${field[2]}]`
+}
+//Formats the Slots to Read with Slashes in-between
 function formatUndefinedSlots(character){
     if(character.slotLvls === undefined || character.slotLvls === ''){
         character.slot1Lvl = 0
@@ -26,35 +40,84 @@ function formatUndefinedSlots(character){
     }
     return character.slotLvls
 }
-
-//CREATE
+//AFTER THE ENTRY IS CREATED
 export const onCreateCharacterSuccess = () => {
-    console.log("you created the entry!")
-    refreshEntries(document.querySelector('#value-container'))
     indexCharacter()
     .then(res => res.json())
     .then(res => {
-    onIndexCharacterSuccess(res.characters)
-    console.log(res.characters)
-    document.querySelector('#main-page').style.display = 'block'
-    document.querySelector('#create-update-page').style.display = 'none'
+        const createdEntryId = res.characters[res.characters.length - 1]._id;
+        //Not sure how to put these 3 Object into a Function
+        const accessory1Data = {
+            accessory:{
+                name: document.querySelector('#accessory1').value,
+                attribute: document.querySelector('#acc-attribute1').value,
+                effect: document.querySelector('#acc-effect1').value,
+                bonus: document.querySelector('#acc-bonus1').value,
+                characterId: createdEntryId
+            }
+        }
+        const accessory2Data = {
+            accessory:{
+                name: document.querySelector('#accessory2').value,
+                attribute: document.querySelector('#acc-attribute2').value,
+                effect: document.querySelector('#acc-effect2').value,
+                bonus: document.querySelector('#acc-bonus2').value,
+                characterId: createdEntryId
+            }
+        }
+        const accessory3Data = {
+            accessory:{
+                name: document.querySelector('#accessory3').value,
+                attribute: document.querySelector('#acc-attribute3').value,
+                effect: document.querySelector('#acc-effect3').value,
+                bonus: document.querySelector('#acc-bonus3').value,
+                characterId: createdEntryId
+            }
+        }
+        /* 
+        The Accessories are not Pushing in Order Unless I Chain Promises... >:/
+         */
+        indexCharacter()
+        .then(res => res.json())
+        .then(() => {
+            createAccessory(accessory1Data)
+            indexCharacter()
+            .then(res => res.json())
+            .then(() => {
+                createAccessory(accessory2Data)
+                indexCharacter()
+                .then(res => res.json())
+                .then(() => {
+                    createAccessory(accessory3Data)
+                    .then(function(){
+                        refreshEntries(indexCharacterContainer)
+                        indexCharacter()
+                        .then(res => res.json())
+                        .then(res => {
+                        onIndexCharacterSuccess(res.characters)
+                        document.querySelector('#main-page').style.display = 'block'
+                        document.querySelector('#create-update-page').style.display = 'none'
+                        })
+                    })
+                })
+            })
+        })
     })
 }
-
-//INDEX
+//INDEX - REPOPULATES DATA ON MAIN PAGE
 export const onIndexCharacterSuccess = (characters) => {
     characters.forEach(character => {
         const div = document.createElement('div')
         div.innerHTML = `
-        <div id="row-container">
+        <div class="row-container">
             <div>${character.name}</div>
             <div>${character.attribute}</div>
             <div>${character.killer}</div>
             <div>${character.soulTrait}</div>
-            <div></div>
-            <div>${formatCharacterLinks(character)}</div>
+            <div>${formatAccessories(character.accessories)}</div>
+            <div>${formatLinks(character.characterLinks)}</div>
             <div>${formatUndefinedSlots(character)}</div>
-            <div id="action-container">
+            <div class="action-container">
                 <button data-id="${character._id}" id="update-entry">
                 <img class="edit-icon" src="./assets/edit.png">
                 </button>
@@ -77,7 +140,7 @@ export const onUpdateCharacterSuccess = () => {
 export const onDeleteCharacterSuccess = () => {
     console.log("delete was successful!")
 }
-
+//DELETES Everything in Div Container
 export const refreshEntries = (container) =>{
     while(container.lastElementChild){
         container.removeChild(container.lastElementChild)
