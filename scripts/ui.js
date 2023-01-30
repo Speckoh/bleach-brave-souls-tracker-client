@@ -1,3 +1,5 @@
+import { store } from './store.js'
+
 import { 
     indexCharacter,
     createAccessory
@@ -145,4 +147,16 @@ export const refreshEntries = (container) => {
     while(container.lastElementChild){
         container.removeChild(container.lastElementChild)
     }
+}
+
+// User Actions
+export const onSignUpSuccess = () => {
+    messageContainer.innerHTML = 'You\'ve created a new user! Now Sign In'
+}
+
+export const onSignInSuccess = (userToken) => {
+    messageContainer.innerHTML = ''
+    store.userToken = userToken
+    authContainer.classList.add('hide')
+    indexContainer.classList.remove('hide')
 }

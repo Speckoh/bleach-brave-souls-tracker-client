@@ -57,7 +57,18 @@ function checkLinkForUndefined(link){
         return link
     }
 }
-
+//Checks for Undefined Accessories when Adding in POSTMAN
+function checkAccessoryForUndefined(remove, accessory, attribute, effect, bonus, response){
+    for(let i = 0; i < 3; i++){
+        if(response[i] !== undefined){
+            document.querySelector(`${remove}${i + 1}`).setAttribute('data-id', `${response[i]._id}`)
+            document.querySelector(`${accessory}${i + 1}`).value = response[i].name
+            document.querySelector(`${attribute}${i + 1}`).value = response[i].attribute
+            document.querySelector(`${effect}${i + 1}`).value = response[i].effect
+            document.querySelector(`${bonus}${i + 1}`).value = response[i].bonus
+        }
+    }
+}
 indexCharacter()
 .then(res => res.json())
 .then(res => {
@@ -171,6 +182,7 @@ document.addEventListener('click', (event) => {
                     characterId: entryToUpdate
                 }
             }
+
             console.log(characterData)
             updateCharacter(characterData, entryToUpdate)
             updateAccessory(accessory1Data, accessoriesToUpdate[0]._id)
@@ -248,12 +260,8 @@ function refreshUpdatePage(id){
         .then((res) => {
             //console.log(res.character)
             //console.log(res.character.accessories[0]._id)
-
-            document.querySelector('#delete-accessory-slot1').setAttribute('data-id', `${res.character.accessories[0]._id}`)
-            document.querySelector('#delete-accessory-slot2').setAttribute('data-id', `${res.character.accessories[1]._id}`)
-            document.querySelector('#delete-accessory-slot3').setAttribute('data-id', `${res.character.accessories[2]._id}`)
-
             accessoriesToUpdate = res.character.accessories
+
             document.querySelector('#input-name').value = res.character.name
             document.querySelector('#input-attribute').value = res.character.attribute
             document.querySelector('#input-killer').value = res.character.killer
@@ -266,22 +274,8 @@ function refreshUpdatePage(id){
             slot1Lvl.value = checkSlotForUndefined(res.character.slot1Lvls)
             slot2Lvl.value = checkSlotForUndefined(res.character.slot2Lvls)
             slot3Lvl.value = checkSlotForUndefined(res.character.slot3Lvls)
-
-            document.querySelector('#accessory1').value = res.character.accessories[0].name
-            document.querySelector('#accessory2').value = res.character.accessories[1].name
-            document.querySelector('#accessory3').value = res.character.accessories[2].name
-
-            document.querySelector('#acc-attribute1').value = res.character.accessories[0].attribute
-            document.querySelector('#acc-attribute2').value = res.character.accessories[1].attribute
-            document.querySelector('#acc-attribute3').value = res.character.accessories[2].attribute
-
-            document.querySelector('#acc-effect1').value = res.character.accessories[0].effect
-            document.querySelector('#acc-effect2').value = res.character.accessories[1].effect
-            document.querySelector('#acc-effect3').value = res.character.accessories[2].effect
-
-            document.querySelector('#acc-bonus1').value = res.character.accessories[0].bonus
-            document.querySelector('#acc-bonus2').value = res.character.accessories[1].bonus
-            document.querySelector('#acc-bonus3').value = res.character.accessories[2].bonus
+            
+            checkAccessoryForUndefined('#delete-accessory-slot', '#accessory','#acc-attribute','#acc-effect','#acc-bonus', res.character.accessories)
         })
 		.catch(onFailure)
 }

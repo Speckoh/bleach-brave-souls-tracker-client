@@ -39,6 +39,7 @@ body{
     justify-content:  center;
     align-content: center;
     width: 100%;
+    margin-bottom: 4px;
     grid-gap: 4px;
 }
 #field-container > div{
@@ -154,9 +155,9 @@ body{
     background-color: transparent;
 }
 .trash-icon, .edit-icon{
-    width: 24px;
-    height: 24px;
-    margin: 2px 0 0 0;
+    width: 30px;
+    height: 30px;
+    margin: -2px 0 0 0;
 }
 #add-return-container{
     display: grid;
