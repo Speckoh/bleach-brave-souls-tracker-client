@@ -157,5 +157,4 @@ export const onSignUpSuccess = () => {
 
 export const onSignInSuccess = (userToken) => {
     store.userToken = userToken
-    authContainer.classList.add('hide')
 }

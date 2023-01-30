@@ -22,8 +22,6 @@ import {
 const mainPage = document.querySelector('#main-page')
 const createUpdatePage = document.querySelector('#create-update-page')
 const indexCharacterContainer = document.querySelector('#value-container')
-const signUpContainer = document.querySelector('#sign-up-form-container')
-const signInContainer = document.querySelector('#sign-in-form-container')
 
 let characterLink1 = document.querySelector('#input-link1')
 let characterLink2 = document.querySelector('#input-link2')
@@ -105,6 +103,8 @@ document.addEventListener('click', (event) => {
             },
         }
         signIn(userData)
+        .then((res) => res.json())
+        .then((res) => onSignInSuccess(res.token))
         .then(function(){
             indexCharacter()
             .then(res => res.json())
