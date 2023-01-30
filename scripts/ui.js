@@ -6,6 +6,7 @@ import {
 } from "./api.js"
 
 const indexCharacterContainer = document.querySelector('#value-container')
+const authContainer = document.querySelector('#auth-container')
 
 //Check for Failure
 export const onFailure = (error) => {
@@ -151,12 +152,10 @@ export const refreshEntries = (container) => {
 
 // User Actions
 export const onSignUpSuccess = () => {
-    messageContainer.innerHTML = 'You\'ve created a new user! Now Sign In'
+    console.log('You\'ve created a new user! Now Sign In')
 }
 
 export const onSignInSuccess = (userToken) => {
-    messageContainer.innerHTML = ''
     store.userToken = userToken
     authContainer.classList.add('hide')
-    indexContainer.classList.remove('hide')
 }

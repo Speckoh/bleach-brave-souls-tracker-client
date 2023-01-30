@@ -1,16 +1,18 @@
 import { 
+    signUp,
+	signIn,
     indexCharacter, 
     createCharacter,
     showCharacter,
     updateCharacter, 
     deleteCharacter,
-    createAccessory,
     updateAccessory,
-    deleteAccessory
 } from "./api.js"
 import { 
     onIndexCharacterSuccess, 
     onFailure, 
+    onSignUpSuccess,
+	onSignInSuccess,
     onCreateCharacterSuccess,
 	onUpdateCharacterSuccess,
 	onDeleteCharacterSuccess,
@@ -20,6 +22,8 @@ import {
 const mainPage = document.querySelector('#main-page')
 const createUpdatePage = document.querySelector('#create-update-page')
 const indexCharacterContainer = document.querySelector('#value-container')
+const signUpContainer = document.querySelector('#sign-up-form-container')
+const signInContainer = document.querySelector('#sign-in-form-container')
 
 let characterLink1 = document.querySelector('#input-link1')
 let characterLink2 = document.querySelector('#input-link2')
@@ -69,13 +73,51 @@ function checkAccessoryForUndefined(remove, accessory, attribute, effect, bonus,
         }
     }
 }
-indexCharacter()
-.then(res => res.json())
-.then(res => {
-    onIndexCharacterSuccess(res.characters)
+// indexCharacter()
+// .then(res => res.json())
+// .then(res => {
+//     onIndexCharacterSuccess(res.characters)
+//     console.log(res.characters)
+// })
+// .catch(onFailure)
+//User Actions
+document.addEventListener('click', (event) => {
+	event.preventDefault()
+    if(event.target.matches('#sign-up-button')){
+        const userData = {
+            credentials: {
+                email: document.querySelector('#new-user-email').value,
+                password: document.querySelector('#new-user-pwd').value,
+            },
+        }
+        signUp(userData).then(onSignUpSuccess).catch(onFailure)
+    }
 })
-.catch(onFailure)
 
+document.addEventListener('click', (event) => {
+	event.preventDefault()
+    if(event.target.matches('#sign-in-button')){
+        console.log("signin")
+        const userData = {
+            credentials: {
+                email: document.querySelector('#existing-user-email').value,
+                password: document.querySelector('#existing-user-pwd').value,
+            },
+        }
+        signIn(userData)
+        .then(function(){
+            indexCharacter()
+            .then(res => res.json())
+            .then(res => {
+                onIndexCharacterSuccess(res.characters)
+                console.log(res.characters)
+                document.querySelector('#main-page').style.display = 'block'
+                document.querySelector('#login-screen').style.display = 'none'
+            })
+            .catch(onFailure)
+        })
+    }
+})
 //CREATE
 document.addEventListener('click', (event) => {
     event.preventDefault()
