@@ -1,7 +1,7 @@
 import { store } from './store.js'
 // User actions
 export const signUp = (data) => {
-	return fetch(`http://localhost:8005/sign-up`, {
+	return fetch(`https://gentle-cove-67138.herokuapp.com/sign-up`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
@@ -12,7 +12,7 @@ export const signUp = (data) => {
 }
 
 export const signIn = (data) => {
-	return fetch(`http://localhost:8005/sign-in`, {
+	return fetch(`https://gentle-cove-67138.herokuapp.com/sign-in`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
@@ -24,18 +24,15 @@ export const signIn = (data) => {
 
 //INDEX
 export const indexCharacter = () => {
-    return fetch(`http://localhost:8005/characters`, {
+    return fetch(`https://gentle-cove-67138.herokuapp.com/characters`, {
         headers: {
 			'Authorization': `Bearer ${store.userToken}`,
 		},
     })
 }
-// export const indexCharacter = () => {
-//     return fetch(`http://localhost:8005/characters`)
-// }
 //SHOW
 export const showCharacter = (id) => {
-    return fetch(`http://localhost:8005/characters/${id}`, {
+    return fetch(`https://gentle-cove-67138.herokuapp.com/characters/${id}`, {
 		headers: {
 			Authorization: `Bearer ${store.userToken}`,
 		},
@@ -43,7 +40,7 @@ export const showCharacter = (id) => {
 }
 //CREATE second fetch parameter is options
 export const createCharacter = (data) => {
-    return fetch(`http://localhost:8005/characters`,{
+    return fetch(`https://gentle-cove-67138.herokuapp.com/characters`,{
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -56,7 +53,7 @@ export const createCharacter = (data) => {
 
 //UPDATE
 export const updateCharacter = (data, id) => {
-    return fetch(`http://localhost:8005/characters/${id}`, {
+    return fetch(`https://gentle-cove-67138.herokuapp.com/characters/${id}`, {
         method: 'PATCH',
         headers: {
             'Accept': 'application/json',
@@ -69,7 +66,7 @@ export const updateCharacter = (data, id) => {
 
 //DELETE
 export const deleteCharacter = (id) => {
-    return fetch(`http://localhost:8005/characters/${id}`, {
+    return fetch(`https://gentle-cove-67138.herokuapp.com/characters/${id}`, {
 		method: 'DELETE',
 		headers: {
 			Authorization: `Bearer ${store.userToken}`,
@@ -80,7 +77,7 @@ export const deleteCharacter = (id) => {
 
 //CREATE Accessory
 export const createAccessory = (data) => {
-    return fetch(`http://localhost:8005/accessories`,{
+    return fetch(`https://gentle-cove-67138.herokuapp.com/accessories`,{
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -92,7 +89,7 @@ export const createAccessory = (data) => {
 }
 //UPDATE
 export const updateAccessory = (data, id) => {
-    return fetch(`http://localhost:8005/accessories/${id}`, {
+    return fetch(`https://gentle-cove-67138.herokuapp.com/accessories/${id}`, {
         method: 'PATCH',
         headers: {
             'Accept': 'application/json',
@@ -104,7 +101,7 @@ export const updateAccessory = (data, id) => {
 }
 //DELETE
 export const deleteAccessory = (id) => {
-    return fetch(`http://localhost:8005/accessories/${id}`, {
+    return fetch(`https://gentle-cove-67138.herokuapp.com/accessories/${id}`, {
         method: 'DELETE'
     })
 }
