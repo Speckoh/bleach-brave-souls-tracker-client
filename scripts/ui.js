@@ -122,10 +122,10 @@ export const onIndexCharacterSuccess = (characters) => {
             <div>${formatUndefinedSlots(character)}</div>
             <div class="action-container">
                 <button data-id="${character._id}" class="update-entry">
-                <img class="icon" src="./assets/edit.png">
+                <img class="icon" src="./assets/edit_w.png">
                 </button>
                 <button data-id="${character._id}" class="delete-entry">
-                <img class="icon" src="./assets/trash.png">
+                <img class="icon" src="./assets/trash_w.png">
                 </button>
             </div>
         </div>
