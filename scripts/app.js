@@ -197,40 +197,33 @@ document.addEventListener('click', (event) => {
                     slotLvls: `${checkSlotValue(slot1Lvl)}/${checkSlotValue(slot2Lvl)}/${checkSlotValue(slot3Lvl)}`
                 }
             }
-            // const accessory1Data = {
-            //     accessory:{
-            //         name: document.querySelector('#accessory1').value,
-            //         attribute: document.querySelector('#acc-attribute1').value,
-            //         effect: document.querySelector('#acc-effect1').value,
-            //         bonus: document.querySelector('#acc-bonus1').value,
-            //         characterId: entryToUpdate
-            //     }
-            // }
-            // const accessory2Data = {
-            //     accessory:{
-            //         name: document.querySelector('#accessory2').value,
-            //         attribute: document.querySelector('#acc-attribute2').value,
-            //         effect: document.querySelector('#acc-effect2').value,
-            //         bonus: document.querySelector('#acc-bonus2').value,
-            //         characterId: entryToUpdate
-            //     }
-            // }
-            // const accessory3Data = {
-            //     accessory:{
-            //         name: document.querySelector('#accessory3').value,
-            //         attribute: document.querySelector('#acc-attribute3').value,
-            //         effect: document.querySelector('#acc-effect3').value,
-            //         bonus: document.querySelector('#acc-bonus3').value,
-            //         characterId: entryToUpdate
-            //     }
-            // }
-            let accessory1Data;
-            let accessory2Data;
-            let accessory3Data;
-            createAccessoryData(accessory1Data, '1', entryToUpdate)
-            createAccessoryData(accessory2Data, '2', entryToUpdate)
-            createAccessoryData(accessory3Data, '3', entryToUpdate)
-            
+            const accessory1Data = {
+                accessory:{
+                    name: document.querySelector('#accessory1').value,
+                    attribute: document.querySelector('#acc-attribute1').value,
+                    effect: document.querySelector('#acc-effect1').value,
+                    bonus: document.querySelector('#acc-bonus1').value,
+                    characterId: entryToUpdate
+                }
+            }
+            const accessory2Data = {
+                accessory:{
+                    name: document.querySelector('#accessory2').value,
+                    attribute: document.querySelector('#acc-attribute2').value,
+                    effect: document.querySelector('#acc-effect2').value,
+                    bonus: document.querySelector('#acc-bonus2').value,
+                    characterId: entryToUpdate
+                }
+            }
+            const accessory3Data = {
+                accessory:{
+                    name: document.querySelector('#accessory3').value,
+                    attribute: document.querySelector('#acc-attribute3').value,
+                    effect: document.querySelector('#acc-effect3').value,
+                    bonus: document.querySelector('#acc-bonus3').value,
+                    characterId: entryToUpdate
+                }
+            }
             console.log(characterData)
             updateCharacter(characterData, entryToUpdate)
             
@@ -327,16 +320,4 @@ function refreshUpdatePage(id){
             checkAccessoryForUndefined('#delete-accessory-slot', '#accessory','#acc-attribute','#acc-effect','#acc-bonus', res.character.accessories)
         })
 		.catch(onFailure)
-}
-function createAccessoryData(data, stringNum, characterId){
-    data = {
-        accessory :{
-            name: document.querySelector('#accessory'+stringNum).value,
-            attribute: document.querySelector('#acc-attribute'+stringNum).value,
-            effect: document.querySelector('#acc-effect'+stringNum).value,
-            bonus: document.querySelector('#acc-bonus'+stringNum).value,
-            characterId: characterId
-        }
-    }
-    return data
 }
