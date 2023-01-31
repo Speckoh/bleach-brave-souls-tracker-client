@@ -14,8 +14,6 @@ import {
     onSignUpSuccess,
 	onSignInSuccess,
     onCreateCharacterSuccess,
-	onUpdateCharacterSuccess,
-	onDeleteCharacterSuccess,
     refreshEntries,
 } from "./ui.js"
 
@@ -71,14 +69,44 @@ function checkAccessoryForUndefined(remove, accessory, attribute, effect, bonus,
         }
     }
 }
-// indexCharacter()
-// .then(res => res.json())
-// .then(res => {
-//     onIndexCharacterSuccess(res.characters)
-//     console.log(res.characters)
-// })
-// .catch(onFailure)
-//User Actions
+//RETURNS A CREATED ACCESSORY DATA
+export function createAccessoryData(stringNum, characterId){
+    const data = {
+        accessory :{
+            name: document.querySelector('#accessory'+stringNum).value,
+            attribute: document.querySelector('#acc-attribute'+stringNum).value,
+            effect: document.querySelector('#acc-effect'+stringNum).value,
+            bonus: document.querySelector('#acc-bonus'+stringNum).value,
+            characterId: characterId
+        }
+    }
+    return data
+}
+//REFRESH UPDATE PAGE FOR WHEN ACCESSORY REMOVE BUTTON HAS BEEN PUSHED
+function refreshUpdatePage(id){
+    showCharacter(id)
+        .then((res) => res.json())
+        .then((res) => {
+            accessoriesToUpdate = res.character.accessories
+
+            document.querySelector('#input-name').value = res.character.name
+            document.querySelector('#input-attribute').value = res.character.attribute
+            document.querySelector('#input-killer').value = res.character.killer
+            document.querySelector('#input-soulTrait').value = res.character.soulTrait
+
+            characterLink1.value = checkLinkForUndefined(res.character.characterLinks[0])
+            characterLink2.value = checkLinkForUndefined(res.character.characterLinks[1])
+            characterLink3.value = checkLinkForUndefined(res.character.characterLinks[2])
+
+            slot1Lvl.value = checkSlotForUndefined(res.character.slot1Lvls)
+            slot2Lvl.value = checkSlotForUndefined(res.character.slot2Lvls)
+            slot3Lvl.value = checkSlotForUndefined(res.character.slot3Lvls)
+            
+            checkAccessoryForUndefined('#delete-accessory-slot', '#accessory','#acc-attribute','#acc-effect','#acc-bonus', res.character.accessories)
+        })
+		.catch(onFailure)
+}
+//SIGN-UP
 document.addEventListener('click', (event) => {
 	event.preventDefault()
     if(event.target.matches('#sign-up-button')){
@@ -91,11 +119,10 @@ document.addEventListener('click', (event) => {
         signUp(userData).then(onSignUpSuccess).catch(onFailure)
     }
 })
-
+//SIGN-IN
 document.addEventListener('click', (event) => {
 	event.preventDefault()
     if(event.target.matches('#sign-in-button')){
-        console.log("signin")
         const userData = {
             credentials: {
                 email: document.querySelector('#existing-user-email').value,
@@ -110,7 +137,6 @@ document.addEventListener('click', (event) => {
             .then(res => res.json())
             .then(res => {
                 onIndexCharacterSuccess(res.characters)
-                console.log(res.characters)
                 document.querySelector('#main-page').style.display = 'block'
                 document.querySelector('#login-screen').style.display = 'none'
             })
@@ -121,7 +147,7 @@ document.addEventListener('click', (event) => {
 //CREATE
 document.addEventListener('click', (event) => {
     event.preventDefault()
-    //GO TO CREATE/UPDATE PAGE TO ADD
+    //GO TO CREATE/UPDATE PAGE IN ORDER TO ADD
     if(event.target.matches('#add-new-entry-button')){
         addingEntry = true;
         createUpdatePage.style.display = 'block'
@@ -130,7 +156,7 @@ document.addEventListener('click', (event) => {
             event.firstElementChild.value = ''
         })
     }
-    //GO TO CREATE/UPDATE PAGE TO EDIT
+    //GO TO CREATE/UPDATE PAGE IN ORDER TO EDIT
     if(event.target.matches('.update-entry')){
         addingEntry = false;
         const id = event.target.getAttribute('data-id')
@@ -139,7 +165,7 @@ document.addEventListener('click', (event) => {
         mainPage.style.display = 'none'
         refreshUpdatePage(id)
     }
-    //Return to MAIN PAGE
+    //RETURN to the MAIN PAGE
     if(event.target.matches('#return-button')){
         indexCharacter()
         .then(res => res.json())
@@ -150,9 +176,9 @@ document.addEventListener('click', (event) => {
         mainPage.style.display = 'block'
         createUpdatePage.style.display = 'none'
     }
-    //CLICKING THE ADD/UPDATE BUTTON ON ADD/UPDATE PAGE
+    //CLICKING THE ADD/UPDATE BUTTON ON ADD/UPDATE PAGE AFTER ALL INFO HAS BEEN INPUTTED
     if(event.target.matches('#add-update-button')){
-        //ADDING NEW ENTRY
+        //ADDING A NEW ENTRY
         if(addingEntry){
             const characterData = {
                 character:{
@@ -179,16 +205,12 @@ document.addEventListener('click', (event) => {
         }
         //UPDATING AN EXISTING ENTRY
         else if(!addingEntry){
-            console.log(entryToUpdate)
-            console.log(accessoriesToUpdate)
             const characterData = {
                 character: {
                     name: document.querySelector('#input-name').value,
                     attribute: document.querySelector('#input-attribute').value,
                     killer: document.querySelector('#input-killer').value,
                     soulTrait: document.querySelector('#input-soulTrait').value,
-                    
-                    // accessories: document.querySelector('#accessory').value,
                     
                     characterLinks: [characterLink1.value, characterLink2.value, characterLink3.value],
                     slot1Lvls: checkSlotValue(slot1Lvl),
@@ -197,40 +219,13 @@ document.addEventListener('click', (event) => {
                     slotLvls: `${checkSlotValue(slot1Lvl)}/${checkSlotValue(slot2Lvl)}/${checkSlotValue(slot3Lvl)}`
                 }
             }
-            const accessory1Data = {
-                accessory:{
-                    name: document.querySelector('#accessory1').value,
-                    attribute: document.querySelector('#acc-attribute1').value,
-                    effect: document.querySelector('#acc-effect1').value,
-                    bonus: document.querySelector('#acc-bonus1').value,
-                    characterId: entryToUpdate
-                }
-            }
-            const accessory2Data = {
-                accessory:{
-                    name: document.querySelector('#accessory2').value,
-                    attribute: document.querySelector('#acc-attribute2').value,
-                    effect: document.querySelector('#acc-effect2').value,
-                    bonus: document.querySelector('#acc-bonus2').value,
-                    characterId: entryToUpdate
-                }
-            }
-            const accessory3Data = {
-                accessory:{
-                    name: document.querySelector('#accessory3').value,
-                    attribute: document.querySelector('#acc-attribute3').value,
-                    effect: document.querySelector('#acc-effect3').value,
-                    bonus: document.querySelector('#acc-bonus3').value,
-                    characterId: entryToUpdate
-                }
-            }
-            console.log(characterData)
-            updateCharacter(characterData, entryToUpdate)
             
-            updateAccessory(accessory1Data, accessoriesToUpdate[0]._id)
-            updateAccessory(accessory2Data, accessoriesToUpdate[1]._id)
-            updateAccessory(accessory3Data, accessoriesToUpdate[2]._id)
-            .then(onUpdateCharacterSuccess)
+            updateCharacter(characterData, entryToUpdate)
+
+            updateAccessory(createAccessoryData('1', entryToUpdate), accessoriesToUpdate[0]._id)
+            updateAccessory(createAccessoryData('2', entryToUpdate), accessoriesToUpdate[1]._id)
+            updateAccessory(createAccessoryData('3', entryToUpdate), accessoriesToUpdate[2]._id)
+
             .then(function(){
                 refreshEntries(indexCharacterContainer)
                 indexCharacter()
@@ -247,9 +242,7 @@ document.addEventListener('click', (event) => {
     //DELETE ENTRY
     if(event.target.matches('.delete-entry')){
         const id = event.target.getAttribute('data-id')
-        console.log(id)
 	    deleteCharacter(id)
-		.then(onDeleteCharacterSuccess)
         .then(function(){
             refreshEntries(indexCharacterContainer)
             indexCharacter()
@@ -261,18 +254,15 @@ document.addEventListener('click', (event) => {
 		.catch(onFailure)
     }
     //CLEAR ACCESSORY
+    //Note: This is not DELETE since Delete will Pop an accessory out and move accessory 3 into slot 2 for example.
+    //For this Scenario, PATCH is more appropriate I feel
     if(event.target.matches('.delete-accessory-button')){
-        // console.log(event.target.getAttribute('data-id'))
-        //deleteAccessory(event.target.getAttribute('data-id'))
         showCharacter(entryToUpdate)
         .then((res) => res.json())
         .then((res) => {
-            console.log(res.character.accessories)
             for (let i = 0; i < res.character.accessories.length; i++){
                 if(res.character.accessories[i]._id === event.target.getAttribute('data-id')){
-                    console.log(res.character._id)
                     res.character.accessories[i].characterId = res.character._id
-                    console.log(res.character.accessories[i])
                     const accessoryData = {
                         accessory:{
                             name: '',
@@ -295,29 +285,3 @@ document.addEventListener('click', (event) => {
         })
     }
 })
-
-function refreshUpdatePage(id){
-    showCharacter(id)
-        .then((res) => res.json())
-        .then((res) => {
-            //console.log(res.character)
-            //console.log(res.character.accessories[0]._id)
-            accessoriesToUpdate = res.character.accessories
-
-            document.querySelector('#input-name').value = res.character.name
-            document.querySelector('#input-attribute').value = res.character.attribute
-            document.querySelector('#input-killer').value = res.character.killer
-            document.querySelector('#input-soulTrait').value = res.character.soulTrait
-
-            characterLink1.value = checkLinkForUndefined(res.character.characterLinks[0])
-            characterLink2.value = checkLinkForUndefined(res.character.characterLinks[1])
-            characterLink3.value = checkLinkForUndefined(res.character.characterLinks[2])
-
-            slot1Lvl.value = checkSlotForUndefined(res.character.slot1Lvls)
-            slot2Lvl.value = checkSlotForUndefined(res.character.slot2Lvls)
-            slot3Lvl.value = checkSlotForUndefined(res.character.slot3Lvls)
-            
-            checkAccessoryForUndefined('#delete-accessory-slot', '#accessory','#acc-attribute','#acc-effect','#acc-bonus', res.character.accessories)
-        })
-		.catch(onFailure)
-}
