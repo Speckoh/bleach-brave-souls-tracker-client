@@ -3,28 +3,58 @@
 }
 body{
     font-family: Arial, Helvetica, sans-serif;
-    width: 1080px;
-    background-color:rgb(160, 160, 160);
+    width: 100%;
+    background-image: url("./assets/ichigo_bg.jpeg");
+    background-size: default;
+
 }
-#login-screen{
-    border: 2px solid rgb(60, 60, 60);
-    width: 400px;
-    margin: 0 auto;
-    display: block;
-}
-.login-container{
+.header-container{
     display: grid;
-    grid-template-columns: 240px;
-    grid-auto-rows: 48px;
+    grid-template-columns: 1fr;
     justify-content:  center;
     align-content: center;
     width: 100%;
-    margin: 30px 0;
+    min-width: 1080px;
+}
+.header-logo{
+    display: grid;
+    justify-content:  center;
+    align-content: center;
+}
+#bbst-logo{
+    width: 500px;
+    height: auto;
+}
+#login-screen{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content:  center;
+    align-content: center;
+    width: 100%;
+    min-width: 1080px;
+}
+#open-new-account-header{
+    color:whitesmoke;
+    font-size: 20px;
+    margin: 20px 0;
+}
+.login-container{
+    border: 2px solid rgb(60, 60, 60);
+    width: 400px;
+    margin: 24px auto;
+    background-color: rgba(160, 160, 160, 0.4);
+    display: block;
+    border: 2px solid rgb(64, 64, 64);
+    border-radius: 10px;
+}
+.login-container > div{
+    margin: 20px 0;
 }
 .login-section-container{
     display: grid;
     justify-content:  center;
     align-content: center;
+    margin: 10px auto;
 }
 .login-section-container > input{
     font-size: 16px;
@@ -42,9 +72,9 @@ body{
     border-radius: 8px;
 }
 hr{
-    height:2px;
-    width: 300px;
-    background-color: rgb(60, 60, 60);
+    height: 2px;
+    width: 340px;
+    background-color: whitesmoke;
 }
 h2{
     display: grid;
@@ -52,25 +82,18 @@ h2{
     align-content: center;
     margin: 20px 0 -10px 0;
 }
-.header-container{
+#add-new-entry{
     display: grid;
-    grid-template-columns: 1fr;
-    justify-content:  center;
-    align-content: center;
-    /* background-color:rgb(210, 210, 210); */
-    width: 900px;
-    width: 100%;
-}
-.header-container > h1{
-    display: grid;
-    justify-content:  center;
-    align-content: center;
+    justify-content: center;
+    min-width: 1080px;
 }
 #add-new-entry > button{
     float: right;
     margin: 8px 16px;
     padding: 8px 16px;
-    background-color:rgb(210, 210, 210);
+    margin-left: 880px;
+    color: black;
+    background-color:rgba(185, 185, 185, 0.5);
     font-size: 20px;
     font-weight: bold;
     border-radius: 8px;
@@ -84,16 +107,21 @@ h2{
     grid-auto-rows: 40px;
     justify-content:  center;
     align-content: center;
+    min-width: 1080px;
     width: 100%;
     margin-bottom: 4px;
     grid-gap: 4px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #field-container > div{
     display: grid;
     justify-content:  center;
     align-content: center;
-    background-color:rgb(210, 210, 210);
+    background-color:rgba(185, 185, 185, 0.5);
     font-weight: bold;
+    border-radius: 6px;
+    color: black;
 }
 .row-container{
     display: grid;
@@ -101,6 +129,7 @@ h2{
     grid-auto-rows: 60px;
     justify-content:  center;
     align-content: center;
+    min-width: 1080px;
     width: 100%;
     grid-gap: 4px;
     margin: 2px 0;
@@ -110,7 +139,9 @@ h2{
     justify-content:  center;
     align-content: center;
     text-align: center;
-    background-color: rgb(180, 180, 180);
+    background-color:rgba(85, 85, 85, 0.4);
+    border-radius: 6px;
+    color: whitesmoke;
     margin: 2px 0;
 }
 .action-container{
@@ -139,6 +170,7 @@ h2{
     grid-auto-rows: 30px;
     justify-content:  center;
     align-content: center;
+    min-width: 1080px;
     width: 100%;
     grid-gap: 4px;
 }
@@ -147,9 +179,11 @@ h2{
     align-content: center;
     text-align: left;
     font-weight: 600;
+    color: whitesmoke
 }
 .character-link-tag, .slot-lvl-tag, .accessory-field{
     text-align: center;
+    color: whitesmoke
 }
 .input-field{
     margin: auto;
@@ -175,6 +209,7 @@ h2{
     grid-auto-rows: 30px;
     justify-content:  center;
     align-content: center;
+    min-width: 1080px;
     width: 100%;
     grid-gap: 4px;
 }
@@ -200,7 +235,7 @@ h2{
 .delete-accessory > button{
     background-color: transparent;
 }
-.trash-icon, .edit-icon{
+.icon{
     width: 30px;
     height: 30px;
     margin: -2px 0 0 0;
@@ -210,6 +245,7 @@ h2{
     grid-template-columns: 240px 240px;
     justify-content:  center;
     align-content: center;
+    min-width: 1080px;
 }
 .add-update-return{
     display: grid;
@@ -228,9 +264,10 @@ input{
 button{
     cursor: pointer;
 }
-img{
+.icon{
     pointer-events: none;
 }
+
 ::-webkit-input-placeholder{
     font-family:'Courier New', Courier, monospace;
     font-style: italic;
