@@ -1,5 +1,10 @@
 import { store } from './store.js'
-// User actions
+
+//##################################
+//API FETCH CALLS
+//##################################
+
+// USER ACTIONS
 export const signUp = (data) => {
 	return fetch(`http://localhost:8005/sign-up`, {
 		method: 'POST',
@@ -44,7 +49,7 @@ export const showCharacter = (id) => {
 		},
 	})
 }
-//CREATE second fetch parameter is options
+//CREATE - second fetch parameter is options
 export const createCharacter = (data) => {
     return fetch(`http://localhost:8005/characters`,{
         method: 'POST',
@@ -79,7 +84,9 @@ export const deleteCharacter = (id) => {
 		},
 	})
 }
-//################################# ACCESSORY CRUD ##################################
+//################################# 
+//ACCESSORY CREATE AND UPDATE
+//##################################
 
 //CREATE Accessory
 export const createAccessory = (data) => {

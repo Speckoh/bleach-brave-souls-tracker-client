@@ -1,3 +1,6 @@
+//##################################
+//IMPORTS
+//##################################
 import { store } from './store.js'
 
 import { 
@@ -7,12 +10,15 @@ import {
 import { 
     createAccessoryData
 } from "./app.js"
+
+
 const indexCharacterContainer = document.querySelector('#value-container')
 
 //Check for Failure
 export const onFailure = (error) => {
     console.log(error)
 }
+
 //Formats the Accessories to Read in Brackets
 function formatAccessories(field){
     let accessories = ['Empty', 'Empty', 'Empty']
@@ -44,6 +50,7 @@ function formatUndefinedSlots(character){
     }
     return character.slotLvls
 }
+
 //AFTER THE ENTRY IS CREATED TO PUSH 3 OBJECTS INTO ACCESSORY WHETHER OR NOT IT'S DEFINED
 //THIS IS SO THAT THE MAIN PAGE POPULATES WITH BRACKETS INSTEAD OF BEING EMPTY, IT WILL SHOW UP AS [EMPTY] INSTEAD
 export const onCreateCharacterSuccess = () => {
@@ -54,7 +61,7 @@ export const onCreateCharacterSuccess = () => {
         const createdEntryId = res.characters[res.characters.length - 1]._id;
         /* 
         The Accessories are not Pushing in Order Unless I Chain Promises... >:/
-        I will fix this on the backend when I have time, need to fix other things...
+        Still needs to refactor, might need to do it backend But could use some Tips...
          */
         indexCharacter()
         .then(res => res.json())
@@ -83,11 +90,10 @@ export const onCreateCharacterSuccess = () => {
         })
     })
 }
-//INDEX - REPOPULATES DATA ON MAIN PAGE
+//INDEX - REPOPULATES DATA ENTRIES ON MAIN PAGE
 export const onIndexCharacterSuccess = (characters) => {
     characters.forEach(character => {
         console.log(character)
-        //if(character.user === )
         const div = document.createElement('div')
         div.innerHTML = `
         <div class="row-container">
@@ -112,7 +118,7 @@ export const onIndexCharacterSuccess = (characters) => {
     })
 }
 
-//DELETES Everything in Div Container
+//DELETES EVERYTHING IN THE DIV CONTAINER (SO I CAN REPOPULATE THEM BACK AS A REFRESH STRATEGY)
 export const refreshEntries = (container) => {
     while(container.lastElementChild){
         container.removeChild(container.lastElementChild)

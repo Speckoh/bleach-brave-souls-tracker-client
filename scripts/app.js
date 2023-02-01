@@ -1,3 +1,6 @@
+//##################################
+//IMPORTS
+//##################################
 import { 
     signUp,
 	signIn,
@@ -17,6 +20,10 @@ import {
     refreshEntries,
 } from "./ui.js"
 
+//##################################
+//THE FREQUENTLY USED DOM ELEMENTS I SET TO VARIABLES
+//##################################
+
 const mainPage = document.querySelector('#main-page')
 const createUpdatePage = document.querySelector('#create-update-page')
 const indexCharacterContainer = document.querySelector('#value-container')
@@ -32,6 +39,10 @@ let slot3Lvl = document.querySelector('#input-slot3')
 let addingEntry = false
 let entryToUpdate
 let accessoriesToUpdate
+
+//##################################
+//FUNCTIONS
+//##################################
 
 //Checks for what is Entered in Input is a Number
 function checkSlotValue(slotLvl){
@@ -106,6 +117,10 @@ function refreshUpdatePage(id){
         })
 		.catch(onFailure)
 }
+//##################################
+//EVENT LISTENERS
+//##################################
+
 //SIGN-UP
 document.addEventListener('click', (event) => {
 	event.preventDefault()
@@ -129,14 +144,14 @@ document.addEventListener('click', (event) => {
                 password: document.querySelector('#existing-user-pwd').value,
             },
         }
-
+        //SETS THE USER TOKEN
         signIn(userData)
         .then((res) => res.json())
         .then((res) => {
             console.log(res)
             onSignInSuccess(res.token)
         })
-        
+        //AFTER SIGNED IN SUCCESSFULLY, FINDS ALL THE CHARACTER.USER THAT MATCHES THE ID OF THE USER, THIS IS DONE BACKEND ON INDEX
         .then(function(){
             indexCharacter()
             .then(res => res.json())
@@ -183,7 +198,7 @@ document.addEventListener('click', (event) => {
     }
     //CLICKING THE ADD/UPDATE BUTTON ON ADD/UPDATE PAGE AFTER ALL INFO HAS BEEN INPUTTED
     if(event.target.matches('#add-update-button')){
-        //ADDING A NEW ENTRY
+        //IF ADDING A NEW ENTRY
         if(addingEntry){
             const characterData = {
                 character:{
@@ -209,6 +224,7 @@ document.addEventListener('click', (event) => {
 
         }
         //UPDATING AN EXISTING ENTRY
+        //IF NOT ADDING BUT EDITING
         else if(!addingEntry){
             const characterData = {
                 character: {
@@ -268,6 +284,7 @@ document.addEventListener('click', (event) => {
             for (let i = 0; i < res.character.accessories.length; i++){
                 if(res.character.accessories[i]._id === event.target.getAttribute('data-id')){
                     res.character.accessories[i].characterId = res.character._id
+                    //Doesn't physically remove Accessories but it turns them into Empty Slots [Empty]
                     const accessoryData = {
                         accessory:{
                             name: '',
@@ -278,6 +295,7 @@ document.addEventListener('click', (event) => {
                         }
                     }
                     updateAccessory(accessoryData, accessoriesToUpdate[i]._id)
+                    //Refreshes the Accessory Row so we see Blank Inputs
                     showCharacter(entryToUpdate)
                     .then(res => res.json())
                     .then(res => {
