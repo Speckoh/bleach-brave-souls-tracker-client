@@ -105,9 +105,3 @@ export const updateAccessory = (data, id) => {
         body: JSON.stringify(data)
     })
 }
-//DELETE
-export const deleteAccessory = (id) => {
-    return fetch(`http://localhost:8005/accessories/${id}`, {
-        method: 'DELETE'
-    })
-}

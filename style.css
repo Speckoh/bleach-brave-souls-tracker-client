@@ -121,7 +121,7 @@ h2{
     display: grid;
     justify-content:  center;
     align-content: center;
-    background-color:rgba(185, 185, 185, 0.5);
+    background-color:rgba(185, 185, 185, 0.6);
     font-weight: bold;
     border-radius: 6px;
     color: black;
@@ -262,7 +262,7 @@ h2{
     width: 200px;
     font-size: 20px;
     font-weight: bold;
-    background-color:rgba(185, 185, 185, 0.5);
+    background-color:rgba(185, 185, 185, 0.6);
     border-radius: 8px;
 }
 input{
