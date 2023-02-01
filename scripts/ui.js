@@ -122,6 +122,7 @@ export const refreshEntries = (container) => {
 // User Actions
 export const onSignUpSuccess = () => {
     console.log('You\'ve created a new user! Now Sign In')
+    document.querySelector('#open-new-account-header').innerHTML = 'You Now Have An Account! Now Sign In!'
 }
 
 export const onSignInSuccess = (userToken) => {
