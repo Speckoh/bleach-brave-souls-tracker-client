@@ -4,7 +4,10 @@ import { store } from './store.js'
 //API FETCH CALLS
 //##################################
 
+
+//##################################
 // USER ACTIONS
+//##################################
 export const signUp = (data) => {
 	return fetch(`http://localhost:8005/sign-up`, {
 		method: 'POST',
@@ -26,13 +29,10 @@ export const signIn = (data) => {
 		body: JSON.stringify(data),
 	})
 }
-export const indexUser = () => {
-    return fetch(`http://localhost:8005/characters`, {
-        headers: {
-			'Authorization': `Bearer ${store.userToken}`,
-		},
-    })
-}
+
+//##################################
+// CHARACTER CALLS
+//##################################
 //INDEX
 export const indexCharacter = () => {
     return fetch(`http://localhost:8005/characters`, {
@@ -85,7 +85,7 @@ export const deleteCharacter = (id) => {
 	})
 }
 //################################# 
-//ACCESSORY CREATE AND UPDATE
+//ACCESSORY CALLS
 //##################################
 
 //CREATE Accessory
