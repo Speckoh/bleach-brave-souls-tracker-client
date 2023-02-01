@@ -9,9 +9,6 @@ This application is an organizer to help fans of Bleach Brave Souls track the nu
  
  ---
 ## Languages & Tools
- 
- ---
-## Languages & Tools
 
 What was used:
 - Javascript
