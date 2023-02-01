@@ -9,19 +9,20 @@
     <title>Bleach Brave Souls Tracker</title>
 </head>
 <body>
+    <!-- LOGO HEADER -->
     <div class="header-container">
         <div class="header-logo"><img id="bbst-logo" class="trash-icon" src="./assets/BBST_Logo.png" alt="Bleach Brave Souls Tracker Logo"></div>
     </div>
-    <!-- Container for sign-up and sign-in form -->
+    <!-- ############################################################################### -->
+    <!-- LOGIN PAGE -->
+    <!-- ############################################################################### -->
     <div id="login-screen">
         <div class="login-container">
             <div>
                 <div class="login-section-container">
-                    <!-- <label for="exampleFormControlInput1" class="form-label"></label> -->
                     <input type="email" id="existing-user-email" class="form-control" placeholder="username">
                 </div>
                 <div class="login-section-container">
-                    <!-- <label for="inputPassword" class="col-sm-2 col-form-label"></label> -->
                     <input type="password" id="existing-user-pwd" class="form-control" placeholder="password">
                 </div>
                 <div class="login-section-container">
@@ -31,11 +32,9 @@
                 <hr>
                 <h2 id="open-new-account-header">Don't Have An Account?</h2>
                 <div class="login-section-container">
-                    <!-- <label for="exampleFormControlInput1" class="form-label">Email address</label> -->
                     <input type="email" id="new-user-email" class="form-control" placeholder="username" name="email">
                 </div>
                 <div class="login-section-container">
-                    <!-- <label for="inputPassword" class="col-sm-2 col-form-label">Password</label> -->
                     <input type="password" id="new-user-pwd" class="form-control" name="password" placeholder="password">
                 </div>
                 <div class="login-section-container">
@@ -44,7 +43,9 @@
             </div>
         </div>
     </div>
+    <!-- ############################################################################### -->
     <!-- MAIN CRUD PAGE -->
+    <!-- ############################################################################### -->
     <div id="main-page">
         <div id="add-new-entry"><button id="add-new-entry-button">Add New Entry</button></div>
         <div id="field-container">
@@ -61,7 +62,9 @@
             <!-- NEW ENTRIES GET ADDED HERE FROM ui.js -->
         </div>
     </div>
+    <!-- ############################################################################### -->
     <!-- CREATE UPDATE PAGE -->
+    <!-- ############################################################################### -->
     <div id="create-update-page">
         <div id="create-character-container">
             <!-- TAG CHARACTER -->
@@ -97,6 +100,8 @@
             <!-- INPUT SLOT 3 LVL -->
             <div class="input-field"><input class="slot-field-input" id="input-slot3" type="number" placeholder="Number" /></div>
         </div>
+        
+        <!-- ACCESSORIES INPUT -->
         <div id="create-accessory-container">
             <div class="accessory-field">Slot #</div>
             <div class="accessory-field">Accessories</div>
@@ -147,6 +152,7 @@
                     <img class="icon" src="./assets/trash_w.png" alt="trashcan"></button>
             </div>
         </div>
+        <!-- UPDATE/RETURN BUTTON -->
         <div id="add-return-container">
             <div class="add-update-return"><button id="add-update-button">Add/Update</button></div>
             <div class="add-update-return"><button id="return-button">Return</button></div>
