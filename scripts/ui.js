@@ -50,6 +50,7 @@ export const onCreateCharacterSuccess = () => {
     indexCharacter()
     .then(res => res.json())
     .then(res => {
+        console.log(res.characters)
         const createdEntryId = res.characters[res.characters.length - 1]._id;
         /* 
         The Accessories are not Pushing in Order Unless I Chain Promises... >:/
@@ -85,6 +86,8 @@ export const onCreateCharacterSuccess = () => {
 //INDEX - REPOPULATES DATA ON MAIN PAGE
 export const onIndexCharacterSuccess = (characters) => {
     characters.forEach(character => {
+        console.log(character)
+        //if(character.user === )
         const div = document.createElement('div')
         div.innerHTML = `
         <div class="row-container">

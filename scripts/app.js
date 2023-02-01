@@ -129,9 +129,14 @@ document.addEventListener('click', (event) => {
                 password: document.querySelector('#existing-user-pwd').value,
             },
         }
+
         signIn(userData)
         .then((res) => res.json())
-        .then((res) => onSignInSuccess(res.token))
+        .then((res) => {
+            console.log(res)
+            onSignInSuccess(res.token)
+        })
+        
         .then(function(){
             indexCharacter()
             .then(res => res.json())
