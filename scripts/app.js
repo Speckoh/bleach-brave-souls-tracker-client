@@ -164,11 +164,11 @@ document.addEventListener('click', (event) => {
         })
     }
 })
-//CREATE
+//CREATE // this label is inaccurate
 document.addEventListener('click', (event) => {
     event.preventDefault()
     //GO TO CREATE/UPDATE PAGE IN ORDER TO ADD
-    if(event.target.matches('#add-new-entry-button')){
+    if(event.target.matches('#add-new-entry-button')){ // nice way to leverage bubbling and checking event targets 
         addingEntry = true;
         createUpdatePage.style.display = 'block'
         mainPage.style.display = 'none'
