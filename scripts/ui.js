@@ -92,7 +92,7 @@ export const onCreateCharacterSuccess = () => {
 }
 //INDEX - REPOPULATES DATA ENTRIES ON MAIN PAGE
 export const onIndexCharacterSuccess = (characters) => {
-    characters.forEach(character => {
+    characters.forEach(character => {// good use of data-* attribute
         console.log(character)
         const div = document.createElement('div')
         div.innerHTML = `
@@ -118,7 +118,7 @@ export const onIndexCharacterSuccess = (characters) => {
     })
 }
 
-//DELETES EVERYTHING IN THE DIV CONTAINER (SO I CAN REPOPULATE THEM BACK AS A REFRESH STRATEGY)
+//DELETES EVERYTHING IN THE DIV CONTAINER (SO I CAN REPOPULATE THEM BACK AS A REFRESH STRATEGY) - epic comment 
 export const refreshEntries = (container) => {
     while(container.lastElementChild){
         container.removeChild(container.lastElementChild)
