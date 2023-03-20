@@ -1,1 +1,7 @@
-{}
+{
+    "name": "bleach-brave-souls-tracker",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "echo 'build script executed'"
+      }
+}
